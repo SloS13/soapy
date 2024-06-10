@@ -93,9 +93,9 @@ export default {
 
       let convoToSend = "";
       if (soap_mode.value) {
-        convoToSend = "Convert the following text into a medical SOAP: " + result;
+        convoToSend = "Convert the following text into a medical SOAP: " + result.value;
       } else {
-        convoToSend = result;
+        convoToSend = result.value;
       }
 
       //do an axios post
