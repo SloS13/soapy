@@ -8,7 +8,17 @@
       >
     </div>
     <div v-else>
+
       <div class="flex flex-row w-full m-1 p-1">
+        How to use: <br>
+        1. Click "start". <br>
+        2. Speak into the microphone.  If the browser asks for access to the microphone, choose Yes <br>
+        3. Click "Stop" when you are done speaking. <br>
+        4. Click "Generate SOAP".  This may take several minutes
+      </div>
+
+      <div class="flex flex-row w-full m-1 p-1">
+       
         <div class="basis-5/12 text-left">
           <div class="rounded-lg bg-gray-200 p-2">
             <h2 class="text-3xl font-bold">Listening Area</h2>
