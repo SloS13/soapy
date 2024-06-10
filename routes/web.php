@@ -8,6 +8,10 @@ Route::get('/', function () {
     return view('app');
 });
 
+Route::get('/test', function () {
+    return "Test Route Works!";
+});
+
 // Route::get('/simple', function () {
 //     return view('simple.index');
 // });
