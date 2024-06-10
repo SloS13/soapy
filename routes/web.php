@@ -12,4 +12,4 @@ Route::get('/', function () {
 //     return view('simple.index');
 // });
 
-Route::post('/simple',[SoapController::class, 'simple']);
+Route::post('simple',[SoapController::class, 'simple']);
