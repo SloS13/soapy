@@ -8,17 +8,16 @@
       >
     </div>
     <div v-else>
-
       <div class="flex flex-row w-full m-1 p-1">
-        How to use: <br>
-        1. Click "start". <br>
-        2. Speak into the microphone.  If the browser asks for access to the microphone, choose Yes <br>
-        3. Click "Stop" when you are done speaking. <br>
-        4. Click "Generate SOAP".  This may take several minutes
+        How to use: <br />
+        1. Click "start". <br />
+        2. Speak into the microphone. If the browser asks for access to the
+        microphone, choose Yes <br />
+        3. Click "Stop" when you are done speaking. <br />
+        4. Click "Generate SOAP". This may take several minutes
       </div>
 
       <div class="flex flex-row w-full m-1 p-1">
-       
         <div class="basis-5/12 text-left">
           <div class="rounded-lg bg-gray-200 p-2">
             <h2 class="text-3xl font-bold">Listening Area</h2>
@@ -26,29 +25,54 @@
           </div>
         </div>
         <div class="basis-2/12 text-center">
-          <div v-if="!isListening" >
-            <button @click="start" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2"><span v-if="result">Continue</span><span v-else>Start</span></button>
+          <div class="flex flex-row w-full m-1 p-1 text-center">
+            <div v-if="!isListening" class="text-center w-full">
+              <button
+                @click="start"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2"
+              >
+                <span class="w-full text-center" v-if="result">Continue</span><span v-else>Start</span>
+              </button>
+            </div>
+            <div v-if="isListening" class="text-center w-full">
+              <button
+                class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-2"
+                @click="stop"
+              >
+                Stop
+              </button>
+            </div>
+            <div v-if="!isListening && result" class="text-center w-full">
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+                @click="generateSoap"
+              >
+                Generate SOAP
+              </button>
+            </div>
           </div>
-          <div v-if="isListening"  >
-            <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-2" @click="stop">Stop</button>
+
+          <div class="flex flex-row w-full m-1 p-1 mt-8 text-center">
+            <div v-if="aiWorking" class="text-center w-full">
+              Doing AI...&nbsp;
+            </div>
+            <div v-if="isListening" class="text-center w-full">
+              Listening...&nbsp;
+            </div>
+            <div v-if="!isListening && !aiWorking" class="text-center w-full">
+              Idle...
+            </div>
           </div>
-          <div v-if="!isListening && result">
-            <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2" @click="generateSoap">Generate SOAP</button>
-          </div>
-          
-          <div>
-            
-            <button @click="soap_mode = !soap_mode" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+
+          <div class="flex flex-row w-full m-1 p-1 mt-8 text-center">
+            <button
+              @click="soap_mode = !soap_mode"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+            >
               <span v-if="soap_mode">SOAP MODE</span>
               <span v-else>Conversation Mode</span>
             </button>
           </div>
-          
-
-
-          <div v-if="aiWorking" class="text-center">Doing AI...&nbsp;</div>
-          <div v-if="isListening" class="text-center">Listening...&nbsp;</div>
-          <div v-if="!isListening && !aiWorking" class="text-center">Idle...</div>
         </div>
         <div class="basis-5/12 text-left">
           <div class="rounded-lg bg-gray-200 p-2">
@@ -57,9 +81,6 @@
           </div>
         </div>
       </div>
-
-     
-     
     </div>
   </div>
 </template>
@@ -83,9 +104,6 @@ export default {
         continuous: true,
         interimResults: true,
       });
-    
-
-    
 
     //do a function to send data via axios
     function generateSoap() {
@@ -93,7 +111,8 @@ export default {
 
       let convoToSend = "";
       if (soap_mode.value) {
-        convoToSend = "Convert the following text into a medical SOAP: " + result.value;
+        convoToSend =
+          "Convert the following text into a medical SOAP: " + result.value;
       } else {
         convoToSend = result.value;
       }
@@ -112,7 +131,7 @@ export default {
           aiWorking.value = false;
         });
     }
-    
+
     return {
       soap,
       sstWorking,
